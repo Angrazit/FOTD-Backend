@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('styles', function (Blueprint $table) {
-            $table->id_style();
+            $table->id('id_style');
+            $table->string('color');
             $table->enum('gender',['male', 'female'])->default('male');
             $table->timestamps();
         });
