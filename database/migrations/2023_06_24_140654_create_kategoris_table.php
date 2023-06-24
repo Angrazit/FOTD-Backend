@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kategoris', function (Blueprint $table) {
-            $table->id();
+            $table->id('kategori_id');
+            $table->unsignedBigInteger('style_id');
             $table->timestamps();
+            $table->foreign('style_id')->references('style_id')->on('styles');
         });
     }
 

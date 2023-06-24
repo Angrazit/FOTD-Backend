@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('styles', function (Blueprint $table) {
-            $table->id('id_style');
+            $table->id('style_id');
             $table->string('color');
             $table->enum('gender',['male', 'female'])->default('male');
+            $table->text('link_gambar');
             $table->timestamps();
         });
     }
