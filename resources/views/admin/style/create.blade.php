@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-<form action='' method='post'>
+<form action='{{ url('style')}}' method='post' enctype="multipart/form-data">
 @csrf
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <div class="mb-3 row">
@@ -28,15 +28,16 @@
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="jurusan" class="col-sm-2 col-form-label">link</label>
+            <label for="jurusan" class="col-sm-2 col-form-label">Gambar file</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='link' id="link">
+                <input type="file" name="image">
             </div>
         </div>
         <div class="mb-3 row">
             <label for="jurusan" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10"><button type="submit" class="btn btn-primary" name="submit">SIMPAN</button></div>
         </div>
+
       </form>
     </div>
 @endsection

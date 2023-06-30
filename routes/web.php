@@ -14,7 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[StyleController::class, 'index']);
-Route::get('/create', function () {
-    return view('admin.create');
-});
+Route::get('/style',[StyleController::class, 'index'])->name('style.index');
+Route::resource('/style', StyleController::class);

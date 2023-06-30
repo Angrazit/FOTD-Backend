@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class style extends Model
 {
+    protected $fillable = ['color', 'gender', 'gambar_path' ,'gambar_url'];
     use HasFactory;
 }

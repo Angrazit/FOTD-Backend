@@ -33,7 +33,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="image-container">
-                        <img src={{ $style->link_gambar }} alt="Another Image">
+                        <img src="{{ Storage::url($style->gambar_path) }}" alt="Another Image">
                   </div>
                 </div>
             </div>

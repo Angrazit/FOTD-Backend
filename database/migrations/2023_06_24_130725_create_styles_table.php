@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('styles', function (Blueprint $table) {
             $table->id('style_id');
-            $table->string('color');
+            $table->string('color')->default('white');
             $table->enum('gender',['male', 'female'])->default('male');
-            $table->text('link_gambar');
+            $table->text('gambar_path')->nullable();
+            $table->text('gambar_url')->nullable();
             $table->timestamps();
         });
     }
