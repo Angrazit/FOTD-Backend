@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('trends', function (Blueprint $table) {
-            $table->id('id_trend');
+            $table->id();
             $table->unsignedBigInteger('style_id');
-            $table->foreign('style_id')->references('style_id')->on('styles');
+            $table->foreign('style_id')->references('id')->on('styles');
             $table->timestamps();
         });
     }

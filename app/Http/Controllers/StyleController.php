@@ -25,20 +25,28 @@ class StyleController extends Controller
         $total = style::count();
         $angka = $total + 1;
         $request->validate([
-            'image' => 'required|image',
+            'image_style' => 'required|image',
         ]);
 
-        $path = $request->file('image')->store("public/images/style {$angka}");
+        $path = $request->file('image_style')->store("public/images/style {$angka}");
         $imageUrl = asset('storage/' . $path);
 
 
-        style::create([
-            'color' => $request->color,
-            'gender' => $request->gender,
-            'gambar_path' => $path,
-            'gambar_url' => $imageUrl,
-        ]);
+        // style::create([
+        //     'color' => $request->color,
+        //     'gender' => $request->gender,
+        //     'gambar_path' => $path,
+        //     'gambar_url' => $imageUrl,
+        // ]);
 
-        return redirect()->route('style.index')->with('success', 'Post created successfully.');
+        $styles = new style();
+        $styles->color = $request->input('color');
+        $styles->gender= $request->input('gender');
+        $styles->gambar_path = $path;
+        $styles->gambar_url = $imageUrl;
+        $styles->save();
+        $id = $styles->id;
+
+        return redirect()->route('count.component', ['id' => $id])->with('success', 'Post created successfully.');
     }
 }
