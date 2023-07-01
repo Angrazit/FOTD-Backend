@@ -44,4 +44,11 @@ class ProductController extends Controller
 
         return redirect()->route('style.index')->with('success', 'Post created successfully.');
     }
+
+    public function show($id)
+    {
+        $products = Product::where('style_id', $id)->get();
+        $styles = style::find($id);
+        return view('admin.style.show', compact('products','styles'));
+    }
 }

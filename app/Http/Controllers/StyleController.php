@@ -49,4 +49,11 @@ class StyleController extends Controller
 
         return redirect()->route('count.component', ['id' => $id])->with('success', 'Post created successfully.');
     }
+
+    public function show($id)
+    {
+        $style = style::find($id);
+        return view('admin.style.show', compact('style'));
+    }
+
 }

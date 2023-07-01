@@ -20,4 +20,5 @@ Route::get('/style',[StyleController::class, 'index'])->name('style.index');
 Route::resource('/style', StyleController::class);
 Route::get('/style/{id}/countcomponent', [ProductController::class, 'count'])->name('count.component');
 Route::get('/style/{id}/createcomponent', [ProductController::class, 'send'])->name('create.component');
+Route::get('/style/{id}/showcomponent', [ProductController::class, 'show'])->name('show.stylewithcomponent');
 Route::post('/style/storedata', [ProductController::class, 'storetodata'])->name('storetodata.product');

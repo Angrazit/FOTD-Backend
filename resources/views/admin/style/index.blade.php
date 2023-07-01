@@ -33,8 +33,10 @@
             <div class="card">
                 <div class="card-body">
                     <div class="image-container">
-                        <img src="{{ Storage::url($style->gambar_path) }}" alt="Another Image">
-                  </div>
+                        <a href="{{ route('show.stylewithcomponent', ['id' => $style->id]) }}">
+                            <img src="{{ Storage::url($style->gambar_path) }}" alt="Another Image">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
