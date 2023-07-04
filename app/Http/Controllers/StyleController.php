@@ -10,8 +10,8 @@ class StyleController extends Controller
     //
     public function index(Request $request)
     {
+        // return style::all();
         $styles = style::all();
-
         return view('admin.style.index',compact('styles'));
     }
 
@@ -29,7 +29,8 @@ class StyleController extends Controller
         ]);
 
         $path = $request->file('image_style')->store("public/images/style {$angka}");
-        $imageUrl = asset('storage/' . $path);
+        $path2 = $request->file('image_style')->store("images/style {$angka}");
+        $imageUrl = asset('storage/' . $path2);
 
 
         // style::create([
@@ -55,5 +56,11 @@ class StyleController extends Controller
         $style = style::find($id);
         return view('admin.style.show', compact('style'));
     }
+
+    public function view()
+    {
+        return style::all();
+    }
+
 
 }

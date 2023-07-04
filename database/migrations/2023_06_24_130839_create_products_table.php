@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('style_id');
             $table->enum('catagory', ['baju','celana','aksesoris','alas kaki'])->default('baju');
+            $table->text('link_local');
             $table->text('link_gambar');
             $table->text('link_toko');
             $table->text('deskripsi');
