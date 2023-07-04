@@ -50,8 +50,8 @@
                             @foreach ($products as $product)
                                 <div class="mb-3 row d-flex align-items-center">
                                             <div class="image-containera">
-                                                <a href="{{ $product->link_toko }}" target="_blank">
-                                                    <img src="{{ Storage::url($product->link_gambar) }}" alt="gambar">
+                                                <a href="{{ $product->link_toko }}">
+                                                    <img src="{{ Storage::url($product->link_local) }}" alt="gambar">
                                                 </a>
                                             </div>
 

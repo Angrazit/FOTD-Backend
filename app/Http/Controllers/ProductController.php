@@ -33,10 +33,13 @@ class ProductController extends Controller
 
 
             $path = $image->store("public/images/style {$alamat}");
+            $path2 = $image->store("public/images/style {$alamat}");
+            $imageUrl = asset('storage/' . $path2);
 
             $product->style_id = $alamat;
             $product->catagory = $request->input("inputs.$key.category");
-            $product->link_gambar = $path;
+            $product->link_local = $path;
+            $product->link_gambar = $imageUrl;
             $product->link_toko = $request->input("inputs.$key.toko");
             $product->deskripsi = $request->input("inputs.$key.deskripsi");
             $product->save();
@@ -50,5 +53,10 @@ class ProductController extends Controller
         $products = Product::where('style_id', $id)->get();
         $styles = style::find($id);
         return view('admin.style.show', compact('products','styles'));
+    }
+
+    public function index(){
+        return Product::all();
+
     }
 }
