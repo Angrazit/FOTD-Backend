@@ -33,7 +33,8 @@ class ProductController extends Controller
 
 
             $path = $image->store("public/images/style {$alamat}");
-            $imageUrl = asset('storage/' . $path);
+            $path2 = $image->store("public/images/style {$alamat}");
+            $imageUrl = asset('storage/' . $path2);
 
             $product->style_id = $alamat;
             $product->catagory = $request->input("inputs.$key.category");
@@ -56,6 +57,6 @@ class ProductController extends Controller
 
     public function index(){
         return Product::all();
-        
+
     }
 }
