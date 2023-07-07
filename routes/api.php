@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/style', [StyleController::class, 'view']);
-Route::get('/style/{id}', [StyleController::class, 'view']);
-Route::get('/product/{style_id}', [ProductController::class, 'index']);
-Route::get('/product/detailcomponent', [ProductController::class, 'index']);
+Route::get('/product', [ProductController::class, 'index']); // ini buat yang nampilin semua product
+Route::get('/style/{id}/product', [ProductController::class, 'showstyleid']); // ini buat nampilin product dengan id style
+Route::get('/product/{id}', [ProductController::class, 'showproductid']); // ini nampilin product berdasarkan idnya
+
