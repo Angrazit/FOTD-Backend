@@ -61,6 +61,11 @@ class StyleController extends Controller
     {
         return style::all();
     }
+    public function showproductid($id){
+        $idsArray = explode(',', $id);
+        $styles = Style::find($id);
+        return response()->json([$styles]);
+    }
 
 
 }
