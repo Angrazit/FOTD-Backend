@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\data;
 use App\Models\product;
 use App\Models\style;
 use Illuminate\Http\Request;
@@ -33,11 +34,7 @@ class ProductController extends Controller
 
 
             $path = $image->store("public/images/style {$alamat}");
-<<<<<<< HEAD
             $path2 = $image->store("images/style {$alamat}");
-=======
-            $path2 = $image->store("public/images/style {$alamat}");
->>>>>>> 1e40fab5345d7866a0052a96cd195da6da6cbe95
             $imageUrl = asset('storage/' . $path2);
 
             $product->style_id = $alamat;
@@ -54,16 +51,17 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $data->products = Product::find('style_id', $id)->get();
-        $data->styles = style::find($id);
-        return response()->json($data);
-        // $data = Product:: findOrFail($id);
-        // return response()->json($data);
+        $products = Product::where('style_id', $id)->get();
+        $styles = style::find($id);
+        return view('admin.style.show', compact('products','styles'));
         
     }
 
-    public function index(){
-        return Product::all();
+    public function index($style_id){
+        $idsArray = explode(',', $style_id);
+        $products = Product::whereIn('style_id', $idsArray)->get();
+
+    return response()->json($products);
 
     }
 }

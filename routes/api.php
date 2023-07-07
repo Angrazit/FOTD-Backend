@@ -20,5 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/style', [StyleController::class, 'view']);
-Route::get('/product', [ProductController::class, 'index']);
-Route::get('/product/{id}/detailcomponent', [ProductController::class, 'show']);
+Route::get('/style/{id}', [StyleController::class, 'view']);
+Route::get('/product/{style_id}', [ProductController::class, 'index']);
+Route::get('/product/detailcomponent', [ProductController::class, 'index']);

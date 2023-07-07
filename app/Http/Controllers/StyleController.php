@@ -54,7 +54,7 @@ class StyleController extends Controller
     public function show($id)
     {
         $style = style::find($id);
-        return view('admin.style.show', compact('style'));
+        return style::view(compact('style'));
     }
 
     public function view()
