@@ -33,7 +33,8 @@ class ProductController extends Controller
 
 
             $path = $image->store("public/images/style {$alamat}");
-            $imageUrl = asset('storage/' . $path);
+            $path2 = $image->store("images/style {$alamat}");
+            $imageUrl = asset('storage/' . $path2);
 
             $product->style_id = $alamat;
             $product->catagory = $request->input("inputs.$key.category");
@@ -49,9 +50,12 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $products = Product::where('style_id', $id)->get();
-        $styles = style::find($id);
-        return view('admin.style.show', compact('products','styles'));
+        $data->products = Product::find('style_id', $id)->get();
+        $data->styles = style::find($id);
+        return response()->json($data);
+        // $data = Product:: findOrFail($id);
+        // return response()->json($data);
+        
     }
 
     public function index(){
