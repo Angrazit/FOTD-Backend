@@ -52,11 +52,22 @@ class ProductController extends Controller
     {
         $products = Product::where('style_id', $id)->get();
         $styles = style::find($id);
+
         return view('admin.style.show', compact('products','styles'));
     }
 
     public function index(){
-        return Product::all();
-
+        return product::all();
     }
+
+    public function showstyleid($id){
+        $products = Product::where('style_id', $id)->get();
+        return response()->json([$products]);
+    }
+
+    public function showproductid($id){
+        $products = Product::find($id);
+        return response()->json([$products]);
+    }
+
 }
