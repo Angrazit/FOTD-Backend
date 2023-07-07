@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StyleController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/style', [StyleController::class, 'view']);
+Route::get('/product', [ProductController::class, 'index']);
+Route::get('/product/{id}/detailcomponent', [ProductController::class, 'show']);
