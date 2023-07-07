@@ -33,7 +33,11 @@ class ProductController extends Controller
 
 
             $path = $image->store("public/images/style {$alamat}");
+<<<<<<< HEAD
             $path2 = $image->store("images/style {$alamat}");
+=======
+            $path2 = $image->store("public/images/style {$alamat}");
+>>>>>>> 1e40fab5345d7866a0052a96cd195da6da6cbe95
             $imageUrl = asset('storage/' . $path2);
 
             $product->style_id = $alamat;
@@ -60,6 +64,6 @@ class ProductController extends Controller
 
     public function index(){
         return Product::all();
-        
+
     }
 }
