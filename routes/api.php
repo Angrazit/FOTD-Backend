@@ -4,6 +4,8 @@ use App\Models\style;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StyleController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +33,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('/style', [StyleController::class, 'view']);
+Route::post('/style' ,[StyleController::class, 'store']);
+Route::post('/product' ,[ProductController::class, 'storetodata']);
+Route::get('/product' ,[ProductController::class, 'index']);
+Route::get('/product/style/{id}' ,[ProductController::class, 'showproduct']);
+Route::get('/style/{id}' ,[StyleController::class, 'showing']);
+Route::get('/product', [ProductController::class, 'index']); // ini buat yang nampilin semua product
+Route::get('/style/{id}/product', [ProductController::class, 'showstyleid']); // ini buat nampilin product dengan id style
+Route::get('/product/{id}', [ProductController::class, 'showproductid']); // ini nampilin product berdasarkan idnya
+
+
