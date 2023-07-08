@@ -49,24 +49,12 @@ class ProductController extends Controller
     {
         $products = Product::where('style_id', $id)->get();
         $styles = style::find($id);
-        return view('admin.style.show', compact('products', 'styles'));
+        return view('admin.style.show', compact('products','styles'));
     }
 
-    public function index()
-    {
+    public function index(){
         return Product::all();
-    }
-    public function showproduct($id)
-    {
-        $products = Product::where('style_id', $id)->get();
-        return response()->json([$products]);
+
     }
 
-    public function sending(Request $request, $id)
-    {
-        $style = style::find($id);
-        $count = $request->input('count');
-
-        return view('admin.product.CreateComponent', ['style' => $style, 'count' => $count]);
-    }
 }
