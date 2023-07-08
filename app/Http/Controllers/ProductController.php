@@ -78,8 +78,8 @@ class ProductController extends Controller
     }
 
     public function showproductid($id){
-        $products = Product::find($id);
-        return response()->json([$products]);
+        $products = Product::where('style_id', $id)->get();
+        return response()->json($products);
     }
 
 }

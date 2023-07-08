@@ -38,8 +38,9 @@ Route::post('/product' ,[ProductController::class, 'storetodata']);
 Route::get('/product' ,[ProductController::class, 'index']);
 Route::get('/product/style/{id}' ,[ProductController::class, 'showproduct']);
 Route::get('/style/{id}' ,[StyleController::class, 'showing']);
+Route::get('/style/{id}', [StyleController::class, 'showproductid']);
 Route::get('/product', [ProductController::class, 'index']); // ini buat yang nampilin semua product
-Route::get('/style/{id}/product', [ProductController::class, 'showstyleid']); // ini buat nampilin product dengan id style
-Route::get('/product/{id}', [ProductController::class, 'showproductid']); // ini nampilin product berdasarkan idnya
+Route::get('/style/product/{id}', [ProductController::class, 'showproductid']); // ini buat nampilin product dengan id style
+Route::get('/products/{style_id}', [ProductController::class, 'showproductid']); // ini nampilin product berdasarkan idnya
 
 
