@@ -1,8 +1,12 @@
 <?php
 
+use App\Models\style;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StyleController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ProductController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +22,20 @@ use App\Http\Controllers\StyleController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+
+
+
+
+
+
+
+
+
 Route::get('/style', [StyleController::class, 'view']);
+Route::post('/style' ,[StyleController::class, 'store']);
+Route::post('/product' ,[ProductController::class, 'storetodata']);
+Route::get('/product' ,[ProductController::class, 'index']);
+Route::get('/product/style/{id}' ,[ProductController::class, 'showproduct']);
+Route::get('/style/{id}' ,[StyleController::class, 'showing']);

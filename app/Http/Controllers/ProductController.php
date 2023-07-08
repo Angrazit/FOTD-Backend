@@ -24,39 +24,49 @@ class ProductController extends Controller
     }
 
     public function storetodata(Request $request)
-    {
-        $alamat = $request->input('style_id');
+{
+    if($request->isMethod('post')){
+        $bookData = $request->all();
 
-        foreach ($request->file('images') as $key => $image) {
-
-            $product = new product();
-
-
-            $path = $image->store("public/images/style {$alamat}");
-            $path2 = $image->store("public/images/style {$alamat}");
-            $imageUrl = asset('storage/' . $path2);
-
-            $product->style_id = $alamat;
-            $product->catagory = $request->input("inputs.$key.category");
-            $product->link_local = $path;
-            $product->link_gambar = $imageUrl;
-            $product->link_toko = $request->input("inputs.$key.toko");
-            $product->deskripsi = $request->input("inputs.$key.deskripsi");
-            $product->save();
+        foreach($bookData['forms'] as $key => $value){
+            $book = new product;
+            $book->style_id = $value['style_id'];
+            $book->category = $value['category'];
+            $book->deskripsi = $value['deskripsi'];
+            $book->link_toko = $value['link_toko'];
+            $path2 = $value['image_file']->store("public/images/style {$value['style_id']}");
+            $path = $value['image_file']->store("public/images/style {$value['style_id']}");
+            $imageUrl = asset('storage/' . $path);
+            $book->link_local = $path2;
+            $book->link_gambar = $imageUrl;
+            $book->save();
         }
-
-        return redirect()->route('style.index')->with('success', 'Post created successfully.');
+        return response()->json(['message'=>'Books added Successfully']);
     }
+}
 
     public function show($id)
     {
         $products = Product::where('style_id', $id)->get();
         $styles = style::find($id);
-        return view('admin.style.show', compact('products','styles'));
+        return view('admin.style.show', compact('products', 'styles'));
     }
 
-    public function index(){
+    public function index()
+    {
         return Product::all();
+    }
+    public function showproduct($id)
+    {
+        $products = Product::where('style_id', $id)->get();
+        return response()->json([$products]);
+    }
 
+    public function sending(Request $request, $id)
+    {
+        $style = style::find($id);
+        $count = $request->input('count');
+
+        return view('admin.product.CreateComponent', ['style' => $style, 'count' => $count]);
     }
 }

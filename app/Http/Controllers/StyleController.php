@@ -10,7 +10,6 @@ class StyleController extends Controller
     //
     public function index(Request $request)
     {
-        // return style::all();
         $styles = style::all();
         return view('admin.style.index',compact('styles'));
     }
@@ -41,14 +40,27 @@ class StyleController extends Controller
         // ]);
 
         $styles = new style();
-        $styles->color = $request->input('color');
+        $styles->color = $request->input('style_color');
         $styles->gender= $request->input('gender');
+        $styles->category= $request->input('category');
         $styles->gambar_path = $path;
         $styles->gambar_url = $imageUrl;
         $styles->save();
         $id = $styles->id;
 
+        return response()->json(['id' => $id]);
+
         return redirect()->route('count.component', ['id' => $id])->with('success', 'Post created successfully.');
+    }
+
+
+
+    public function showing($id)
+    {
+        $style = Style::find($id);
+
+
+        return response()->json([$style]);
     }
 
     public function show($id)
