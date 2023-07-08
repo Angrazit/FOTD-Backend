@@ -35,7 +35,7 @@ class ProductController extends Controller
             $book->deskripsi = $value['deskripsi'];
             $book->link_toko = $value['link_toko'];
             $path2 = $value['image_file']->store("public/images/style {$value['style_id']}");
-            $path = $value['image_file']->store("public/images/style {$value['style_id']}");
+            $path = $value['image_file']->store("/images/style {$value['style_id']}");
             $imageUrl = asset('storage/' . $path);
             $book->link_local = $path2;
             $book->link_gambar = $imageUrl;
