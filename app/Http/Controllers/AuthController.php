@@ -29,7 +29,7 @@ class AuthController extends Controller
             'name' => $name,
             'email' => $email,
         ]);
-        return redirect('/signup');
+        return redirect('/register');
         
     }
     

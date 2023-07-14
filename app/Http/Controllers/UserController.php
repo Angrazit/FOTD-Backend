@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
+
+
 
 class UserController extends Controller
 {
@@ -11,15 +16,29 @@ class UserController extends Controller
     {
         // Perform form validation on $request->input() data if needed
         
-        // Create a new user in the database
+        /* Create a new user in the database
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->save();
-        
-        // Return a response indicating success or failure
-        return response()->json(['message' => 'User created successfully'], 201);
+        $id = $user->id;
+        return response()->json(['user' => $user], 201);*/
+
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+        ]);
+    
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+        ]);
+    
+        return response()->json(['user' => $user], 201);
+
     }
     public function signupWithGoogle(Request $request)
     {
@@ -38,6 +57,16 @@ class UserController extends Controller
         $user->save();
 
         // Return a response indicating success or failure
-        return response()->json(['message' => 'User created successfully'], 201);
+        return response()->json(['user' => $user], 201);
+    }
+    public function loginn(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $token = $this->createToken('MyApp')->plainTextToken;
+            return response()->json(['user' => $user, 'token' => $token], 200);
+        }
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
 }
