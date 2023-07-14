@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('color')->default('white');
             $table->enum('gender',['male', 'female'])->default('male');
+            $table->enum('category',['Casual', 'Formal','Street Style', 'Vintage Style','Islamic Style'])->default('Casual');
             $table->text('gambar_path')->nullable();
             $table->text('gambar_url')->nullable();
             $table->timestamps();

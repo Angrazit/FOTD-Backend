@@ -7,7 +7,13 @@
         <div class="mb-3 row">
             <label for="nim" class="col-sm-2 col-form-label">color</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='color' id="color">
+                <input type="text" class="form-control" name='style_color' id="color">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="nim" class="col-sm-2 col-form-label">color</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name='category' id="category">
             </div>
         </div>
         <div class="mb-3 row">
