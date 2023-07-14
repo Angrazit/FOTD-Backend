@@ -22,21 +22,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-
-
-
-
-
-
-
-
-
 Route::get('/style', [StyleController::class, 'view']);
 Route::post('/style' ,[StyleController::class, 'store']);
 Route::post('/product' ,[ProductController::class, 'storetodata']);
 Route::get('/product' ,[ProductController::class, 'index']);
-Route::get('/product/style/{id}' ,[ProductController::class, 'showproduct']);
+Route::get('/product/{id}' ,[ProductController::class, 'showproduct']);
+Route::put('/updateproduct/{id}', [ProductController::class, 'updatecomponent']);
+Route::post('/perbarui/gambar/{id}', [ProductController::class, 'perbarui']);
+Route::delete('/product/delete/{id}', [ProductController::class, 'delete']);
 Route::get('/style/{id}' ,[StyleController::class, 'showing']);
 Route::get('/style/{id}', [StyleController::class, 'showproductid']);
 Route::get('/product', [ProductController::class, 'index']); // ini buat yang nampilin semua product
