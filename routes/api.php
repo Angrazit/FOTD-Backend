@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StyleController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,11 +40,16 @@ Route::get('/style/{id}', [StyleController::class, 'showproductid']);
 //Route::get('/product', [ProductController::class, 'index']); // ini buat yang nampilin semua product
 Route::get('/style/product/{id}', [ProductController::class, 'showproductid']); // ini buat nampilin product dengan id style
 Route::get('/products/{style_id}', [ProductController::class, 'showproductid']); // ini nampilin product berdasarkan idnya
-Route::get('/auth/google', 'AuthController@redirectToGoogle');
-Route::get('/auth/google/callback', 'AuthController@handleGoogleCallback');
+// Route::get('/auth/google', 'AuthController@redirectToGoogle');
+// Route::get('/auth/google/callback', 'AuthController@handleGoogleCallback');
 Route::post('/signup', [UserController::class, 'signup']);
-//Route::post('/signup/google', [UserController::class, 'signupWithGoogle']);
-Route::post('/login', [LoginController::class, 'login']);
+Route::get('/signup/google', [UserController::class, 'redirectToGoogle']);
+Route::get('/signup/google/callback', [UserController::class,'handleGoogleCallback']);
+Route::post('/login', [userController::class, 'login']);
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+// Route::get('/signup/google', [RegisterController::class,'redirectToGoogle']);
+// Route::get('/signup/google/callback', [RegisterController::class,'handleGoogleCallback']);
+Route::post('/login/google', 'AuthController@redirectToGoogle');
 
 
 

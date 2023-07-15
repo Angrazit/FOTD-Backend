@@ -13,9 +13,15 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            // $token = $this->createToken('')->plainTextToken;
-            return response()->json(['user' => $user], /*'token' => $token,*/ 200);
+             $token = $this->createToken('')->plainTextToken;
+            return response()->json(['user' => $user, 'token' => $token], 200);
         }
         return response()->json(['error' => 'Unauthorized'], 401);
+    }
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json(['message' => 'Logged out.'], 200);
     }
 }
