@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StyleController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TrendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/style', [StyleController::class, 'view']);
 Route::post('/style' ,[StyleController::class, 'store']);
+Route::post('/trend' ,[TrendController::class, 'addtrend']);
+Route::get('/trends' ,[TrendController::class, 'gettrend']);
 Route::post('/product' ,[ProductController::class, 'storetodata']);
-Route::get('/product' ,[ProductController::class, 'index']);
+Route::get('/product/index' ,[ProductController::class, 'index']);
 Route::get('/product/{id}' ,[ProductController::class, 'showproduct']);
 Route::put('/updateproduct/{id}', [ProductController::class, 'updatecomponent']);
 Route::post('/perbarui/gambar/{id}', [ProductController::class, 'perbarui']);
