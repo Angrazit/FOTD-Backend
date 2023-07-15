@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginController;
 use App\Models\style;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,7 +42,7 @@ Route::get('/auth/google', 'AuthController@redirectToGoogle');
 Route::get('/auth/google/callback', 'AuthController@handleGoogleCallback');
 Route::post('/signup', [UserController::class, 'signup']);
 //Route::post('/signup/google', [UserController::class, 'signupWithGoogle']);
-Route::post('/login', [UserController::class], 'loginn');
+Route::post('/login', [LoginController::class, 'login']);
 
 
 

@@ -59,12 +59,12 @@ class UserController extends Controller
         // Return a response indicating success or failure
         return response()->json(['user' => $user], 201);
     }
-    public function loginn(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            $token = $this->createToken('MyApp')->plainTextToken;
+            $token = $this->createToken('')->plainTextToken;
             return response()->json(['user' => $user, 'token' => $token], 200);
         }
         return response()->json(['error' => 'Unauthorized'], 401);
