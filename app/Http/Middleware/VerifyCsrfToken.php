@@ -13,5 +13,17 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+        'api/*',
+        'sub.domain.zone' => [
+        'prefix/*'
+        ],
+    ];
+    protected $middlewareGroups = [
+        'api' => [
+            // ...
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            // ...
+        ],
     ];
 }

@@ -9,12 +9,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Sanctum\Sanctum;
+
 
 
 
 
 class UserController extends Controller
 {
+    use HasApiTokens;
     public function signup(Request $request)
     {
         // Perform form validation on $request->input() data if needed
@@ -44,7 +48,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
     
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken('sanctum')->plainTextToken;
 
         return response()->json(['token' => $token], 201);
     }
@@ -69,7 +73,7 @@ class UserController extends Controller
             $user->save();
         }
         // Return a response indicating success or failure
-        $token = $this->createToken('')->plainTextToken;
+        $token = $this->createToken('sanctum')->plainTextToken;
         return response()->json(['user' => $user, 'token' => $token], 201);
     }
     public function redirectToGoogle()
@@ -87,7 +91,12 @@ class UserController extends Controller
 
     if ($existingUser) {
         // Log in the existing user
+        $token = $existingUser->createToken('sanctum')->plainTextToken;
+        //$csrfToken = csrf_token();
+        //  return response()->json($token);
         Auth::login($existingUser);
+        // return response()->json(['token' => $token]);
+        
     } else {
         // Create a new user
         $newUser = new User();
@@ -99,25 +108,36 @@ class UserController extends Controller
         $newUser->save();
 
         // Log in the new user
+        $token = $newUser->createToken('sanctum')->plainTextToken;
         Auth::login($newUser);
+        
+        // return response()->json(['token' => $token]);
     }
+    //  return response()->json(['token' => $token]);
+    return redirect('http://localhost:5173?token=' . $token);
+   
+        
 
     // Redirect the user to the desired page
-    return redirect('http://localhost:5173');
+    
     }
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            $token = $this->createToken('')->plainTextToken;
+            $token = $this->createToken('sanctum')->plainTextToken;
             return response()->json(['user' => $user, 'token' => $token], 200);
         }
         return response()->json(['error' => 'Unauthorized'], 401);
     }
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        Auth::guard('web')->logout();
+        // $request->user()->currentAccessToken()->delete();
+        // Auth::logout();
+        // $user = auth()->user();
+        // $user->token()->where('id', $user->currentAccessToken()->id)->delete();
 
         return response()->json(['message' => 'Logged out.'], 200);
     }
