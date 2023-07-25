@@ -45,7 +45,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
         ]);
     
         $token = $user->createToken('sanctum')->plainTextToken;
@@ -85,12 +85,10 @@ class UserController extends Controller
         $user = Socialite::driver('google')->user();
         
 
-    // Check if the user exists in the database
     $existingUser = User::where('email', $user->getEmail())->first();
     
 
     if ($existingUser) {
-        // Log in the existing user
         $token = $existingUser->createToken('sanctum')->plainTextToken;
         //$csrfToken = csrf_token();
         //  return response()->json($token);
@@ -98,16 +96,14 @@ class UserController extends Controller
         // return response()->json(['token' => $token]);
         
     } else {
-        // Create a new user
         $newUser = new User();
         $newUser->name = $user->getName();
         $newUser->email = $user->getEmail();
         $newUser->google_id = $user->getId();
         $newUser->image_url = $user->getAvatar();
-        $newUser->password = bcrypt(str::random(16)); // Generate a random password
+        $newUser->password = bcrypt(str::random(16));
         $newUser->save();
 
-        // Log in the new user
         $token = $newUser->createToken('sanctum')->plainTextToken;
         Auth::login($newUser);
         
@@ -124,20 +120,17 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $token = $this->createToken('sanctum')->plainTextToken;
+        $user = User::where('email', $credentials['email'])->first();
+        if ($user && $credentials['password'] === $user->password) {
+            $token = $user->createToken('sanctum')->plainTextToken;
             return response()->json(['user' => $user, 'token' => $token], 200);
         }
+
         return response()->json(['error' => 'Unauthorized'], 401);
     }
     public function logout(Request $request)
     {
         Auth::guard('web')->logout();
-        // $request->user()->currentAccessToken()->delete();
-        // Auth::logout();
-        // $user = auth()->user();
-        // $user->token()->where('id', $user->currentAccessToken()->id)->delete();
 
         return response()->json(['message' => 'Logged out.'], 200);
     }

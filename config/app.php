@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Laravel\Sanctum\SanctumServiceProvider::class,
+        Laravel\Ui\UiServiceProvider::class,
     ])->toArray(),
 
     /*

@@ -40,16 +40,12 @@ Route::get('/style/{id}', [StyleController::class, 'showproductid']);
 //Route::get('/product', [ProductController::class, 'index']); // ini buat yang nampilin semua product
 Route::get('/style/product/{id}', [ProductController::class, 'showproductid']); // ini buat nampilin product dengan id style
 Route::get('/products/{style_id}', [ProductController::class, 'showproductid']); // ini nampilin product berdasarkan idnya
-// Route::get('/auth/google', 'AuthController@redirectToGoogle');
-// Route::get('/auth/google/callback', 'AuthController@handleGoogleCallback');
 Route::post('/signup', [UserController::class, 'signup']);
 Route::get('/signup/google', [UserController::class, 'redirectToGoogle']);
 Route::get('/signup/google/callback', [UserController::class,'handleGoogleCallback']);
 Route::post('/login', [userController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
-// Route::get('/signup/google', [RegisterController::class,'redirectToGoogle']);
-// Route::get('/signup/google/callback', [RegisterController::class,'handleGoogleCallback']);
-Route::post('/login/google', 'AuthController@redirectToGoogle');
+Route::get('/login/google', [UserController::class, 'redirectToGoogle']);
 
 
 
