@@ -8,9 +8,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StyleController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProductController;
+<<<<<<< HEAD
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 
+=======
+use App\Http\Controllers\TrendController;
+>>>>>>> 100ee444fb24d8b0dbf26ccb1d1c6f98bdcae260
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +33,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/style', [StyleController::class, 'view']);
 Route::post('/style' ,[StyleController::class, 'store']);
+Route::post('/trend' ,[TrendController::class, 'addtrend']);
+Route::get('/trends' ,[TrendController::class, 'gettrend']);
 Route::post('/product' ,[ProductController::class, 'storetodata']);
+<<<<<<< HEAD
 //Route::get('/product' ,[ProductController::class, 'index']);
+=======
+Route::get('/product/index' ,[ProductController::class, 'index']);
+>>>>>>> 100ee444fb24d8b0dbf26ccb1d1c6f98bdcae260
 Route::get('/product/{id}' ,[ProductController::class, 'showproduct']);
 Route::put('/updateproduct/{id}', [ProductController::class, 'updatecomponent']);
 Route::post('/perbarui/gambar/{id}', [ProductController::class, 'perbarui']);

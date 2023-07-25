@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('trends', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('style_id');
+            $table->text('gambar_url');
             $table->foreign('style_id')->references('id')->on('styles');
             $table->timestamps();
         });
