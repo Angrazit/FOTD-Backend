@@ -22,7 +22,7 @@ class UserController extends Controller
     public function signup(Request $request)
     {
         // Perform form validation on $request->input() data if needed
-        
+
         /* Create a new user in the database
         $user = new User();
         $user->name = $request->input('name');
@@ -41,13 +41,13 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-    
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-    
+
         $token = $user->createToken('sanctum')->plainTextToken;
 
         return response()->json(['token' => $token], 201);
@@ -83,20 +83,18 @@ class UserController extends Controller
     public function handleGoogleCallback()
     {
         $user = Socialite::driver('google')->user();
-        
+
 
     // Check if the user exists in the database
     $existingUser = User::where('email', $user->getEmail())->first();
-    
-
-    if ($existingUser) {
+        if ($existingUser) {
         // Log in the existing user
         $token = $existingUser->createToken('sanctum')->plainTextToken;
         //$csrfToken = csrf_token();
         //  return response()->json($token);
         Auth::login($existingUser);
         // return response()->json(['token' => $token]);
-        
+
     } else {
         // Create a new user
         $newUser = new User();
@@ -110,16 +108,16 @@ class UserController extends Controller
         // Log in the new user
         $token = $newUser->createToken('sanctum')->plainTextToken;
         Auth::login($newUser);
-        
+
         // return response()->json(['token' => $token]);
     }
     //  return response()->json(['token' => $token]);
     return redirect('http://localhost:5173?token=' . $token);
-   
-        
+
+
 
     // Redirect the user to the desired page
-    
+
     }
     public function login(Request $request)
     {
