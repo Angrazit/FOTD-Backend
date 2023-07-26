@@ -45,7 +45,7 @@ Route::get('/signup/google', [UserController::class, 'redirectToGoogle']);
 Route::get('/signup/google/callback', [UserController::class,'handleGoogleCallback']);
 Route::post('/login', [userController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
-Route::get('/login/google', [UserController::class, 'redirectToGoogle']);
+Route::get('/login/google', [UserController::class , 'redirectToGoogle']);
 
 
 
