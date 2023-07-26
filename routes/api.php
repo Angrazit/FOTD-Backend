@@ -8,13 +8,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StyleController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProductController;
-<<<<<<<<< Temporary merge branch 1
-use App\Http\Controllers\TrendController;
-=========
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 
->>>>>>>>> Temporary merge branch 2
 
 /*
 |--------------------------------------------------------------------------
@@ -33,14 +29,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/style', [StyleController::class, 'view']);
 Route::post('/style' ,[StyleController::class, 'store']);
-Route::post('/trend' ,[TrendController::class, 'addtrend']);
-Route::get('/trends' ,[TrendController::class, 'gettrend']);
 Route::post('/product' ,[ProductController::class, 'storetodata']);
-<<<<<<<<< Temporary merge branch 1
-Route::get('/product/index' ,[ProductController::class, 'index']);
-=========
 //Route::get('/product' ,[ProductController::class, 'index']);
->>>>>>>>> Temporary merge branch 2
 Route::get('/product/{id}' ,[ProductController::class, 'showproduct']);
 Route::put('/updateproduct/{id}', [ProductController::class, 'updatecomponent']);
 Route::post('/perbarui/gambar/{id}', [ProductController::class, 'perbarui']);
