@@ -57,6 +57,7 @@ class ProductController extends Controller
     {
         return Product::all();
     }
+    
     public function showproduct($id)
     {
         $products = Product::where('style_id', $id)->get();
