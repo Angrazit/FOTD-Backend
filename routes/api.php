@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/style', [StyleController::class, 'view']);
 Route::post('/style' ,[StyleController::class, 'store']);
 Route::post('/product' ,[ProductController::class, 'storetodata']);
-//Route::get('/product' ,[ProductController::class, 'index']);
+//Route::get('/product/index' ,[ProductController::class, 'index']);
 Route::get('/product/{id}' ,[ProductController::class, 'showproduct']);
 Route::put('/updateproduct/{id}', [ProductController::class, 'updatecomponent']);
 Route::post('/perbarui/gambar/{id}', [ProductController::class, 'perbarui']);
@@ -46,6 +46,6 @@ Route::get('/signup/google/callback', [UserController::class,'handleGoogleCallba
 Route::post('/login', [userController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/login/google', [UserController::class , 'redirectToGoogle']);
-
-
+Route::post('/trend' ,[TrendController::class, 'addtrend']);
+Route::get('/trends' ,[TrendController::class, 'gettrend']);
 
