@@ -26,4 +26,19 @@ class TrendController extends Controller
         // Find the product
         return trend::all();
     }
+    public function delete($id)
+    {
+        $product = trend::find($id);
+        $product->delete();
+
+    }
+
+    public function deletewithstyle($id)
+    {
+        $products = trend::where('style_id', $id)->get();
+
+        foreach ($products as $product) {
+            $product->delete();
+        }
+    }
 }

@@ -27,9 +27,14 @@ use App\Http\Controllers\TrendController;
 // });
 
 Route::get('/style', [StyleController::class, 'view']);
+Route::get('/styleimage/{id}', [StyleController::class, 'takeimage']);
 Route::post('/style' ,[StyleController::class, 'store']);
 Route::post('/trend' ,[TrendController::class, 'addtrend']);
 Route::get('/trends' ,[TrendController::class, 'gettrend']);
+Route::delete('/trend/delete/{id}' ,[TrendController::class, 'delete']);
+Route::delete('/trendwithstyle/delete/{id}' ,[TrendController::class, 'deletewithstyle']);
+Route::delete('/style/delete/{id}' ,[StyleController::class, 'delete']);
+Route::delete('/productwithstyle/delete/{id}' ,[ProductController::class, 'deletewithstyle']);
 Route::post('/product' ,[ProductController::class, 'storetodata']);
 Route::get('/product/index' ,[ProductController::class, 'index']);
 //Route::get('/product' ,[ProductController::class, 'index']);

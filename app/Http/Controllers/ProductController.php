@@ -57,7 +57,7 @@ class ProductController extends Controller
     {
         return Product::all();
     }
-    
+
     public function showproduct($id)
     {
         $products = Product::where('style_id', $id)->get();
@@ -98,7 +98,20 @@ class ProductController extends Controller
             Storage::delete($product->link_local);
         }
         $product->delete();
+    }
 
+    public function deletewithstyle($id)
+    {
+        $products = Product::where('style_id', $id)->get();
+
+        foreach ($products as $product) {
+            if ($product->link_gambar) {
+                // Delete the image file from storage
+                Storage::delete($product->link_gambar);
+                Storage::delete($product->link_local);
+            }
+            $product->delete();
+        }
     }
 
     public function perbarui(Request $request, $id)
@@ -119,7 +132,7 @@ class ProductController extends Controller
         $path2 = $file->store("public/images/style {$style}");
         $imagePath = $file->store("images/style {$style}");
         $imageUrl = asset('storage/' . $imagePath);
-        $product->link_local = $path2 ;
+        $product->link_local = $path2;
         $product->link_gambar = $imageUrl;
         $product->save();
 
@@ -147,6 +160,4 @@ class ProductController extends Controller
 
         return response()->json(['message' => 'Product updated successfully'], 200);
     }
-
-
 }
